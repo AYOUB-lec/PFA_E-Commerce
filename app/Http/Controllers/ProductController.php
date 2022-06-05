@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\product;
+use App\Models\category;
 use App\Http\Requests\StoreproductRequest;
 use App\Http\Requests\UpdateproductRequest;
 
@@ -15,7 +16,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('home')->with([
+            "products" => product::latest()->paginate(5),
+            "categories" => category::has("products")->get(),
+        ]);
     }
 
     /**
@@ -47,7 +51,10 @@ class ProductController extends Controller
      */
     public function show(product $product)
     {
-        //
+        
+        return view("products.show")->with([
+            "product" => $product
+        ]);
     }
 
     /**

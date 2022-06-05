@@ -57,7 +57,7 @@
                     Catégories
                 </li>
                 @foreach ($categories as $category)
-                    <a href="" class="list-group-item list-group-item-action">
+                    <a href="{{ route("category.products",$category->slug)}}" class="list-group-item list-group-item-action">
                         {{ $category->title }}
                         ({{ $category->products->count() }})
                     </a>

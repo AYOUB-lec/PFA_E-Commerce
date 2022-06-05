@@ -29,4 +29,18 @@ class HomeController extends Controller
             "categories" => category::has("products")->get(),
         ]);
     }
+
+     /**
+     * Show products by category.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function showProductByCategory(category $category)
+    {
+        $products = $category->products()->paginate(10);
+        return view('home')->with([
+            "products" => $products,
+            "categories" => category::has("products")->get(),
+        ]);
+    }
 }

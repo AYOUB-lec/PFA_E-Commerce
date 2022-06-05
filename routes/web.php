@@ -20,4 +20,5 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/activate/{code}', [App\Http\Controllers\ActivationController::class, 'activateUserAccount'])->name('user.activate');
 Route::get('/activate/{email}', [App\Http\Controllers\ActivationController::class, 'resendActivationController'])->name('code.resend');
-Route::resource('products', "ProductController"); 
+Route::resource('products', App\Http\Controllers\ProductController::class); 
+Route::get('products/category/{category}', [App\Http\Controllers\HomeController::class, 'showProductByCategory'])->name('category.products');
