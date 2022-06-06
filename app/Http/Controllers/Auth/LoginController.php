@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -38,28 +37,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-    
-    /**
-     * The user has been authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
-     * @return mixed
-     */
-    protected function authenticated(Request $request, $user)
-    {
-        //
-        if(!$user->active) {
-            Auth::logout();
-            return redirect("/login")
-                  ->with([
-                      'errorLink' => 'Veuillez activer votre compte
-                      <a href ="' . route('code.resend' , $user->email) . '">
-                         Renvoyer le lien d\'activation
-                      </a>'
-                  ])->withEmail($user->email);
-        }
-    }
-
 }
