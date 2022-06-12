@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Models\product;
+use App\Models\category;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -23,6 +24,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home')->with([
+            "products" => product::latest()->paginate(5),
+            "categories" => category::has("products")->get(),
+        ]);
+    }
+
+     /**
+     * Show products by category.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function showProductByCategory(category $category)
+    {
+        $products = $category->products()->paginate(10);
+        return view('home')->with([
+            "products" => $products,
+            "categories" => category::has("products")->get(),
+        ]);
     }
 }

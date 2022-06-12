@@ -17,10 +17,10 @@ class ActivateYourAccount extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($code)
     {
         $this->code = $code;
-        $this->url =  ;  
+        $this->url =  route("user.activate",$code);  
         //
     }
 
@@ -31,6 +31,7 @@ class ActivateYourAccount extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->from('ayoublechkar.fm@gmail.com')
+                    ->markdown('emails.activate_user_account');
     }
 }

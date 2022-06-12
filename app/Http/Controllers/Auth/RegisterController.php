@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Http\Request;
+use App\Mail\ActivateYourAccount;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\str;
+use Illuminate\Support\Facades\Mail;
 class RegisterController extends Controller
 {
     /*
@@ -29,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::racine;
 
     /**
      * Create a new controller instance.
@@ -70,4 +72,28 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+     /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        //generate user activation  code
+        $code = Str::random(128); 
+        //insert code
+        $user->code = $code;
+        //update user table
+        $user->update();
+        //logout user
+        $this->guard()->logout();
+        //send email to activate account
+        Mail::to($user)->send(new ActivateYourAccount($code));
+        //redirect user
+        return redirect('/login')
+        ->withInfo("Please activate your account the link has been sent ");
+    }
+    
 }
