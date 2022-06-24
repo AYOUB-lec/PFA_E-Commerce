@@ -8,7 +8,7 @@
 @if(session()->has("success"))
     <div class="alert alert-success alert-dismissible fade show">
         <strong> {{ session()->get("success") }} </strong>
-        <button type="button" class="close">
+        <button type="button" class="closeBtn"  onclick="this.parentElement.style.display = 'none';">
             <span> &times; </span>
         </button> 
     </div>
@@ -17,7 +17,7 @@
 @if(session()->has("warning"))
     <div class="alert alert-warning alert-dismissible fade show">
         <strong> {{session()->get("warning")}} </strong>
-        <button type="button" class="close">
+        <button type="button" class="closeBtn"  onclick="this.parentElement.style.display = 'none';">
             <span> &times; </span>
         </button> 
     </div>
@@ -26,7 +26,7 @@
 @if(session()->has("errorLink"))
     <div class="alert alert-danger alert-dismissible fade show">
         <strong> {!! session()->get("errorLink") !!} </strong>
-        <button type="button" class="close">
+        <button type="button" class="closeBtn"  onclick="this.parentElement.style.display = 'none';">
             <span> &times; </span>
         </button> 
     </div>
@@ -35,7 +35,7 @@
 @if(session()->has("info"))
     <div class="alert alert-info alert-dismissible fade show">
         <strong> {!!session()->get('info')!!} </strong> 
-        <button type="button" class="close">
+        <button type="button" class="closeBtn"  onclick="this.parentElement.style.display = 'none';">
             <span> &times; </span>
         </button> 
     </div>

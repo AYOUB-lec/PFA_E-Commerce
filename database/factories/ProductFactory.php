@@ -26,7 +26,7 @@ class ProductFactory extends Factory
             "old_price" => $this->faker->numberBetween($min = 100 , $max = 900),
             "inStock" => $this->faker->numberBetween($min = 1 , $max = 10),
             "image" => $this->faker->imageUrl($width = 640 , $height = 480),
-            "category_id" => $this->faker->numberBetween($min = 31 , $max = 40),
+            "category_id" => $this->faker->numberBetween($min = 1 , $max = 10),
         ];
     }
 }

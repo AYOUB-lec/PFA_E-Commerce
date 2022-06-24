@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('price',8,2)->default(0);
             $table->decimal('old_price',8,2)->default(0);
             $table->decimal('inStock')->default(0);
+            $table->integer('qty')->default(0);
             $table->string('image');
             $table->bigInteger('category_id')->unsigned();
             $table->timestamps();

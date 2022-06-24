@@ -21,7 +21,7 @@ class OrderFactory extends Factory
             'qty' =>  $this->faker->numberBetween($min = 1 , $max = 10),
             "price" => $this->faker->numberBetween($min = 100 , $max = 900),
             "total" => $this->faker->numberBetween($min = 1000 , $max = 9000),
-            "user_id" => $this->faker->numberBetween($min = 31 , $max = 40),
+            "user_id" => $this->faker->numberBetween($min = 1 , $max = 20),
         ]; 
     }
 }
