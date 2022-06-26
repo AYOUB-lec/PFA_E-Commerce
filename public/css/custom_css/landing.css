@@ -1,0 +1,62 @@
+.main{
+    height: 94vh;
+    width: 100%;
+}
+.main img{
+    object-fit:cover;
+    height: 100%;
+    width: 100%;
+    filter: grayscale(0.9);
+    opacity: 0.9;
+}  
+
+
+.floating-content{
+    position: absolute;
+    height: 50%;
+    width: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.floating-content .first span{
+    font-size: 3rem;
+    font-weight:500;
+    font-family: "playflair Display",sans-serif;
+    font-style: italic;
+    color: rgb(244, 234, 234);
+}
+
+.floating-content .second{
+    font-size: 4rem;
+    font-weight:800;
+    font-family: "sora",sans-serif;
+    color: rgb(255, 255, 255);
+    letter-spacing:2px;
+}
+
+.floating-content .third{
+    font-size: 1.5rem;
+    font-weight:500;
+    font-family: "poppins",sans-serif;
+    color: rgb(255, 255, 255);
+    letter-spacing:10px;
+}
+
+.floating-content .forth button{
+    font-size: 1.2rem;
+    height: 45px ;
+    width: 155px ;
+    background-color: black;
+    color: white;
+    border: none;
+    font-family: "poppins",sans-serif;
+    font-weight:500;
+    margin-top: 50px;
+}

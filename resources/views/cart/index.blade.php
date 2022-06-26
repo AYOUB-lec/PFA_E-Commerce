@@ -82,17 +82,21 @@
                             total
                         </td>
                         
-                        <td colspan="3" class="border border-success br-pr" >
+                        <td colspan="3" class="border border-success " >
                             {{Cart::getSubtotal()}} DH
                         </td>
-                        <style>
-                            .br-pr{
-                                margin-top: 5px;
-                            }
-                        </style>
+                        
                     </tr>
                 </tbody>
             </table>
+             @if (Cart::getSubtotal() > 0)
+                <div class="form-group">
+                    <a href="{{route('make.payment')}}" class="btn btn-primary mt-3">
+                       Payer {{Cart::getSubtotal()}} DH via PayPal
+                    </a>
+                </div>
+                 
+             @endif
         </div>
     </div>
 </div>

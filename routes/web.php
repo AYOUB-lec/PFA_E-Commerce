@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Auth;
 //login logout & register routes 
 Auth::routes();
 //home route 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\LandingController::class, 'index'])->name('page.first');
+Route::get('/explore', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 //activate user account routes
 Route::get('/activate/{code}', [App\Http\Controllers\ActivationController::class, 'activateUserAccount'])->name('user.activate');
 Route::get('/resend/{email}', [App\Http\Controllers\ActivationController::class, 'resendActivationCode'])->name('code.resend');
@@ -29,4 +31,7 @@ Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name
 Route::post('/add/cart/{product}', [App\Http\Controllers\CartController::class, 'addProductToCart'])->name('add.cart');
 Route::delete('/remove/{product}/cart', [App\Http\Controllers\CartController::class, 'removeProductFromCart'])->name('remove.cart');
 Route::put('/update/{product}/cart', [App\Http\Controllers\CartController::class, 'updateProductOnCart'])->name('update.cart');
- 
+ //payment Routes
+ Route::get('/handle-payment', [App\Http\Controllers\PaypalPaymentController::class, 'handlePayment'])->name('make.payment');
+ Route::get('/cancel-payment', [App\Http\Controllers\PaypalPaymentController::class, 'paymentCancel'])->name('cancel.payment');
+ Route::get('/cancel-success', [App\Http\Controllers\PaypalPaymentController::class, 'paymentSuccess'])->name('success.payment');
