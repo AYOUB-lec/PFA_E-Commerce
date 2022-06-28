@@ -43,11 +43,13 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        <li class="nav-item"><a class="nav-link" href="{{ route('page.first') }}">Home</a></li><!-- index landingController -->
-                        <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Products</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Contact</a></li> 
+                        
                         @guest
+
+                            <li class="nav-item"><a class="nav-link" href="{{ route('page.first') }}">Home</a></li><!-- index landingController -->
+                            <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Products</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Contact</a></li> 
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -62,26 +64,52 @@
                             @endif
 
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                        @if(auth()->guard("admin")->check())
+                        {{-- <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ auth()->guard("admin")->user()->name }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item"
+                                    href="{{ route("admin.index") }}">
+                                    Dashboard
+                                </a>
+                                <a class="dropdown-item" href="{{ route('admin.logout') }}">
+                                    {{ __('Déconnexion') }}
+                                </a>
+                            </div>
+                        </li> --}}
+                        <li class="nav-item"><a class="nav-link" href="{{ route("admin.index") }}">Dashboard</a></li> 
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin.logout') }}">{{ __('Logout') }}</a></li> 
+                        <li class="nav-item"><a class="nav-link" href="#"> <strong>{{ auth()->guard("admin")->user()->name}} </strong></a></li> 
+
+                    @else
+                        
+                        <li class="nav-item"><a class="nav-link" href="{{ route('page.first') }}">Home</a></li><!-- index landingController -->
+                        <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Contact</a></li> 
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                    @endif
                         @endguest
-                        <li class="nav-item"><a class="nav-link" href="{{ route('cart.index') }}">Cart</a></li> 
-
+                        
                     </ul>
                 </div>
             </div>

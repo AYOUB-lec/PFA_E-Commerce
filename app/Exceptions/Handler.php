@@ -47,4 +47,21 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+
+    /**
+ * Render an exception into an HTTP response.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @param  \Exception  $exception
+ * @return \Illuminate\Http\Response
+ */
+    public function render($request, Throwable $exception)
+    {
+        if ( $request->is("admin") || $request->is("admin/*") ) {
+            return redirect()->guest("/admin/login");
+        }
+    
+        return parent::render($request, $exception);
+    }
 }

@@ -35,3 +35,13 @@ Route::put('/update/{product}/cart', [App\Http\Controllers\CartController::class
  Route::get('/handle-payment', [App\Http\Controllers\PaypalPaymentController::class, 'handlePayment'])->name('make.payment');
  Route::get('/cancel-payment', [App\Http\Controllers\PaypalPaymentController::class, 'paymentCancel'])->name('cancel.payment');
  Route::get('/cancel-success', [App\Http\Controllers\PaypalPaymentController::class, 'paymentSuccess'])->name('success.payment');
+//admin routes
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+Route::get('/admin/login', [App\Http\Controllers\AdminController::class, 'showAdminLoginForm'])->name('admin.login');
+Route::post('/admin/login', [App\Http\Controllers\AdminController::class, 'adminLogin'])->name('admin.login');
+Route::get('/admin/logout', [App\Http\Controllers\AdminController::class, 'adminLogout'])->name('admin.logout');
+Route::get('/admin/products', [App\Http\Controllers\AdminController::class, 'getProducts'])->name('admin.products');
+Route::get('/admin/orders', [App\Http\Controllers\AdminController::class, 'getOrders'])->name('admin.orders');
+
+//orders routes
+Route::resource('orders', 'OrderController');
