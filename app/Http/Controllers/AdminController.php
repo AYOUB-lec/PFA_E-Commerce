@@ -41,11 +41,13 @@ class AdminController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ], $request->get("remember"))) {
+            auth()->guard("web")->logout();
             return redirect("/admin");
+           
         } else {
             return redirect()->route("admin.login");
         }
-       
+        
     }
 
     public function adminLogout()

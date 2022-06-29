@@ -44,4 +44,4 @@ Route::get('/admin/products', [App\Http\Controllers\AdminController::class, 'get
 Route::get('/admin/orders', [App\Http\Controllers\AdminController::class, 'getOrders'])->name('admin.orders');
 
 //orders routes
-Route::resource('orders', 'OrderController');
+Route::resource('orders', App\Http\Controllers\OrderController::class);

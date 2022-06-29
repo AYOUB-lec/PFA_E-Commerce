@@ -40,7 +40,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto left-nav">
-                      
+                   
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -50,6 +50,12 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Products</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Contact</a></li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('cart.index') }}">
+                                <i class="fa fa-shopping-cart"></i>
+                                {{ \Cart::getContent()->count() }}
+                            </a>
+                        </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">

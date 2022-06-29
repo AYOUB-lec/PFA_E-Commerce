@@ -60,6 +60,7 @@ class LoginController extends Controller
                       </a>'
                   ])->withEmail($user->email);
         }
+        auth()->guard("admin")->logout();
     }
 
 }

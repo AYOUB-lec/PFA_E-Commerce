@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use App\Models\order;
+use App\Models\product;
 
 class PaypalPaymentController extends Controller
 {
@@ -68,8 +69,14 @@ class PaypalPaymentController extends Controller
                 "total" => $item->price * $item->quantity,
                 "paid" => 1
             ]);
-            \Cart::clear();
+            $old_qty = product::find($item->id)->inStock;
+            product::where('id', $item->id)->update(array('inStock' =>  $old_qty - $item->quantity ));
+            // $item->slug($item->name)->update([
+            //     "inStock" => $old_qty - $item->quantity,
+            // ]);
+            // \Cart::clear();
         }
+        \Cart::clear();
         return redirect()->route('cart.index')->with([
             'success' => 'Paid successfully'
         ]);

@@ -87,7 +87,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(product $product)
     {
         //
         return view("products.show")->with([
@@ -101,7 +101,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(product $product)
     {
         //
         return view("admin.products.edit")->with([
@@ -117,7 +117,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, product $product)
     {
         //validation
         $this->validate($request, [
@@ -160,7 +160,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(product $product)
     {
         //delete data
         $image_path = public_path("images/products/" . $product->image);
